@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { ApplicationFormData, applicationSchema } from "@/lib/schemas";
-import { useCreateApplicationMutation, useGetAuthUserQuery } from "@/state/api";
+// import { useCreateApplicationMutation, useGetAuthUserQuery } from "@/state/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -18,8 +18,8 @@ const ApplicationModal = ({
   onClose,
   propertyId,
 }: ApplicationModalProps) => {
-  const [createApplication] = useCreateApplicationMutation();
-  const { data: authUser } = useGetAuthUserQuery();
+  // const [createApplication] = useCreateApplicationMutation();
+  // const { data: authUser } = useGetAuthUserQuery();
 
   const form = useForm<ApplicationFormData>({
     resolver: zodResolver(applicationSchema),
@@ -32,22 +32,22 @@ const ApplicationModal = ({
   });
 
   const onSubmit = async (data: ApplicationFormData) => {
-    if (!authUser || authUser.userRole !== "tenant") {
-      console.error(
-        "You must be logged in as a tenant to submit an application"
-      );
-      return;
-    }
-
-    await createApplication({
-      ...data,
-      applicationDate: new Date().toISOString(),
-      status: "Pending",
-      propertyId: propertyId,
-      tenantCognitoId: authUser.cognitoInfo.userId,
-    });
-    onClose();
+    // if (!authUser || authUser.userRole !== "tenant") {
+    //   console.error(
+    //     "You must be logged in as a tenant to submit an application"
+    //   );
+    //   return;
   };
+
+  //   await createApplication({
+  //     ...data,
+  //     applicationDate: new Date().toISOString(),
+  //     status: "Pending",
+  //     propertyId: propertyId,
+  //     tenantCognitoId: authUser.cognitoInfo.userId,
+  //   });
+  //   onClose();
+  // };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

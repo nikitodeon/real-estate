@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAuthUserQuery } from "@/state/api";
+// import { useGetAuthUserQuery } from "@/state/api";
 import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import ImagePreviews from "./ImagePreviews";
@@ -14,7 +14,7 @@ const SingleListing = () => {
   const { id } = useParams();
   const propertyId = Number(id);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: authUser } = useGetAuthUserQuery();
+  // const { data: authUser } = useGetAuthUserQuery();
 
   return (
     <div>
@@ -33,13 +33,13 @@ const SingleListing = () => {
         </div>
       </div>
 
-      {authUser && (
-        <ApplicationModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          propertyId={propertyId}
-        />
-      )}
+      {/* {authUser && ( */}
+      <ApplicationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        propertyId={propertyId}
+      />
+      {/* )} */}
     </div>
   );
 };

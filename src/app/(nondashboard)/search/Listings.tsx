@@ -1,6 +1,6 @@
 import {
   useAddFavoritePropertyMutation,
-  useGetAuthUserQuery,
+  // useGetAuthUserQuery,
   useGetPropertiesQuery,
   useGetTenantQuery,
   useRemoveFavoritePropertyMutation,
@@ -12,13 +12,13 @@ import React from "react";
 import CardCompact from "@/components/CardCompact";
 
 const Listings = () => {
-  const { data: authUser } = useGetAuthUserQuery();
-  const { data: tenant } = useGetTenantQuery(
-    authUser?.cognitoInfo?.userId || "",
-    {
-      skip: !authUser?.cognitoInfo?.userId,
-    }
-  );
+  // const { data: authUser } = useGetAuthUserQuery();
+  // const { data: tenant } = useGetTenantQuery(
+  //   authUser?.cognitoInfo?.userId || "",
+  //   {
+  //     skip: !authUser?.cognitoInfo?.userId,
+  //   }
+  // );
   const [addFavorite] = useAddFavoritePropertyMutation();
   const [removeFavorite] = useRemoveFavoritePropertyMutation();
   const viewMode = useAppSelector((state) => state.global.viewMode);
@@ -31,23 +31,21 @@ const Listings = () => {
   } = useGetPropertiesQuery(filters);
 
   const handleFavoriteToggle = async (propertyId: number) => {
-    if (!authUser) return;
-
-    const isFavorite = tenant?.favorites?.some(
-      (fav: Property) => fav.id === propertyId
-    );
-
-    if (isFavorite) {
-      await removeFavorite({
-        cognitoId: authUser.cognitoInfo.userId,
-        propertyId,
-      });
-    } else {
-      await addFavorite({
-        cognitoId: authUser.cognitoInfo.userId,
-        propertyId,
-      });
-    }
+    // if (!authUser) return;
+    // const isFavorite = tenant?.favorites?.some(
+    //   (fav: Property) => fav.id === propertyId
+    // );
+    // if (isFavorite) {
+    //   await removeFavorite({
+    //     cognitoId: authUser.cognitoInfo.userId,
+    //     propertyId,
+    //   });
+    // } else {
+    //   await addFavorite({
+    //     cognitoId: authUser.cognitoInfo.userId,
+    //     propertyId,
+    //   });
+    // }
   };
 
   if (isLoading) return <>Loading...</>;
@@ -69,12 +67,16 @@ const Listings = () => {
                 key={property.id}
                 property={property}
                 isFavorite={
-                  tenant?.favorites?.some(
-                    (fav: Property) => fav.id === property.id
-                  ) || false
+                  true
+                  // tenant?.favorites?.some(
+                  //   (fav: Property) => fav.id === property.id
+                  // ) || false
                 }
                 onFavoriteToggle={() => handleFavoriteToggle(property.id)}
-                showFavoriteButton={!!authUser}
+                showFavoriteButton={
+                  true
+                  // !!authUser
+                }
                 propertyLink={`/search/${property.id}`}
               />
             ) : (
@@ -82,12 +84,17 @@ const Listings = () => {
                 key={property.id}
                 property={property}
                 isFavorite={
-                  tenant?.favorites?.some(
-                    (fav: Property) => fav.id === property.id
-                  ) || false
+                  true
+
+                  // tenant?.favorites?.some(
+                  //   (fav: Property) => fav.id === property.id
+                  // ) || false
                 }
                 onFavoriteToggle={() => handleFavoriteToggle(property.id)}
-                showFavoriteButton={!!authUser}
+                showFavoriteButton={
+                  true
+                  // !!authUser
+                }
                 propertyLink={`/search/${property.id}`}
               />
             )

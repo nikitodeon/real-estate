@@ -1,19 +1,19 @@
 import { Button } from "@/components/ui/button";
-import { useGetAuthUserQuery } from "@/state/api";
+// import { useGetAuthUserQuery } from "@/state/api";
 import { Phone } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 const ContactWidget = ({ onOpenModal }: ContactWidgetProps) => {
-  const { data: authUser } = useGetAuthUserQuery();
+  // const { data: authUser } = useGetAuthUserQuery();
   const router = useRouter();
 
   const handleButtonClick = () => {
-    if (authUser) {
-      onOpenModal();
-    } else {
-      router.push("/signin");
-    }
+    // if (authUser) {
+    //   onOpenModal();
+    // } else {
+    //   router.push("/signin");
+    // }
   };
 
   return (
@@ -34,7 +34,7 @@ const ContactWidget = ({ onOpenModal }: ContactWidgetProps) => {
         className="w-full bg-primary-700 text-white hover:bg-primary-600"
         onClick={handleButtonClick}
       >
-        {authUser ? "Submit Application" : "Sign In to Apply"}
+        {/* {authUser ? "Submit Application" : "Sign In to Apply"} */}
       </Button>
 
       <hr className="my-4" />
